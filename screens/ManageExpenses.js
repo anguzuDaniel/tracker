@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 
-import { StyleSheet, Text, View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import IconButton from "../components/UI/IconButton";
 import { GlobalStyles } from "../constants/styles";
 
@@ -10,7 +10,9 @@ function ManageExpenses({ route, navigation }) {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: isEditing ? 'Edit Expense' : 'Add Expense'
+            title: isEditing ? 'Edit Expense' : 'Add Expense',
+            headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
+            headerTintColor: 'white'
         });
     }, [navigation, isEditing]);
 
@@ -19,17 +21,18 @@ function ManageExpenses({ route, navigation }) {
     }
 
     return (
-        <View styles={styles.container}>
-            {
-                isEditing && 
+        <View style={styles.container}>
+            
+            { isEditing && (               
                 <View style={styles.deleteContainer}>
                     <IconButton 
                         icon="trash" 
                         color={GlobalStyles.colors.error500} 
-                        size={36} onPress={onDeleteExpense}  
+                        size={36} 
+                        onPress={onDeleteExpense}  
                     />
                 </View>
-            }
+            )}
         </View>
     );
 }
